@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Login, Register } from './';
 import Navigationbar from './Navigationbar'
+import Main from './Main';
 
 class Landingpage extends Component {
 
@@ -8,7 +9,7 @@ class Landingpage extends Component {
 		return(
 			<div className='container'>
 				<Navigationbar />
-				<Login />
+				<Main />
 			</div>
 			)
 	}
