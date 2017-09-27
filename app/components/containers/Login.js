@@ -61,7 +61,7 @@ class Login extends Component {
 				</form>
 				<form className ='signup-form' onSubmit={ (e) => this.handleRegister(e)} >
 					<button className = "btn btn-default" type = "submit">
-						<Link to='/register'>Sign-up</Link></button>
+						<Link className='button-link' to='/register'>Sign-up</Link></button>
 				</form>
 			</div>
 			)
