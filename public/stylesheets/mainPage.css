@@ -35,7 +35,7 @@
 	align-items: center;
 }
 .register-container {
-	background-color: #238410;
+	background-color: #172e42;
 	border-radius: 5px;
 }
 .register-form {
@@ -69,4 +69,21 @@
 }
 .button-link {
 	display: block;
+}
+
+.btn-last {
+  margin-bottom: 5rem;
+}
+
+.correct-input {
+  color: green;
+}
+
+.incorrect-input {
+  color: red;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
 }

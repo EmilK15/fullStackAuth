@@ -44,7 +44,7 @@ class Login extends Component {
 
 	}
 
-	handleRegister(e) {
+	handleSignup(e) {
 		e.preventDefault();
 	}
 
@@ -59,8 +59,8 @@ class Login extends Component {
 					placeholder = "Password" required onChange={ (e) => this.changePw(e) }/>
 					<button className = "btn btn-default" type = "submit">Login</button>
 				</form>
-				<form className ='signup-form' onSubmit={ (e) => this.handleRegister(e)} >
-					<button className = "btn btn-default" type = "submit">
+				<form className ='signup-form' onSubmit={ (e) => this.handleSignup(e)} >
+					<button className = "btn btn-last btn-default" type = "submit">
 						<Link className='button-link' to='/register'>Sign-up</Link></button>
 				</form>
 			</div>
