@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Login, Register } from './'
+import { Login, Register } from './';
 import Navigationbar from './Navigationbar'
+import Main from './Main';
 
 class Landingpage extends Component {
+
 	render() {
 		return(
 			<div className='container'>
 				<Navigationbar />
+				<Main />
 			</div>
 			)
 	}

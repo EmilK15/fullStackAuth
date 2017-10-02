@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var validate = require('./formValidate');
 var apiRoutes = express.Router();
 var app = express();
 
@@ -27,6 +28,13 @@ var ensureAuthorized = function(req, res, next) {
 		res.redirect('/');
 }
 
+var serverVal = function(req, res, next) {
+if(validate(req.body.email, req.body.username, req.body.password, req.body.rpassword))
+		return next();
+	else
+		res.redirect('/')
+}
+
 app.get('/', function(req, res) {
 	if(req.user)
 		if(req.user.isAdmin)
@@ -37,7 +45,7 @@ app.get('/', function(req, res) {
 		res.render('index', { message: req.flash('message')[0] });
 });
 
-apiRoutes.post('/registerUser', passport.authenticate('registerUser', {
+apiRoutes.post('/registerUser', serverVal, passport.authenticate('registerUser', {
 	successRedirect: '/api/user',
 	failureRedirect: '/',
 	failureFlash: true
@@ -53,7 +61,7 @@ apiRoutes.post('/login', passport.authenticate('login', {
 		res.redirect('/api/user');
 });
 
-apiRoutes.post('/registerAdmin', passport.authenticate('registerAdmin', {
+apiRoutes.post('/registerAdmin', serverVal, passport.authenticate('registerAdmin', {
 	successRedirect: '/api/admin',
 	failureRedirect: '/',
 	failureFlash: true
@@ -89,7 +97,7 @@ apiRoutes.get('/logout', ensureAuthorized, function(req, res) {
 });
 
 app.use(function(req, res) {
-	res.status(404).send({ url: req.originalUrl + ' not found ' });
+	res.status(404).redirect('/');
 });
 
 module.exports = app;

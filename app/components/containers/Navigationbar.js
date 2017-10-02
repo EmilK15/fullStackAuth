@@ -7,12 +7,6 @@ export default () => {
 				<div className='navbar-header'>
 					<a className='navbar-brand' href='#'>MERN auth</a>
 				</div>
-
-				<div className='collapse navbar-collapse'>
-					<ul className='nav navbar-nav navbar-right'>
-						<li><a href='#'>Sign up</a></li>
-					</ul>
-				</div>
 			</div>
 		</nav>
 		);
