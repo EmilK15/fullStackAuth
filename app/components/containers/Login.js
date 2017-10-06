@@ -15,15 +15,9 @@ class Login extends Component {
 		};
 	}
 
-	changeUser(e) {
+	handleChange(e) {
 		this.setState({
-			username: e
-		});
-	}
-
-	changePw(e) {
-		this.setState({
-			password: e
+			[e.target.name]: e
 		});
 	}
 
@@ -54,9 +48,9 @@ class Login extends Component {
 				<Error error = {this.state.error} />
 				<form className ='login-form' id ='authenticate' onSubmit={ (e) => this.handleSubmit(e)} >
 					<input className = "input input-username" type = "text" name = "username" 
-					placeholder = "Username" required onChange={ (e) => this.changeUser(e) }/>
+					placeholder = "Username" required onChange={ (e) => this.handleChange(e) }/>
 					<input className = "input input-pw" type = "password" name = "password" 
-					placeholder = "Password" required onChange={ (e) => this.changePw(e) }/>
+					placeholder = "Password" required onChange={ (e) => this.handleChange(e) }/>
 					<button className = "btn btn-default" type = "submit">Login</button>
 				</form>
 				<form className ='signup-form' onSubmit={ (e) => this.handleSignup(e)} >

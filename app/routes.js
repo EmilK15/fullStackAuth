@@ -45,6 +45,16 @@ app.get('/', function(req, res) {
 		res.render('index', { message: req.flash('message')[0] });
 });
 
+app.get('/register', function(req, res) {
+	if(req.user)
+		if(req.user.isAdmin)
+			res.redirect('/api/admin');
+		else
+			res.redirect('/api/user');
+	else
+		res.render('index', { message: req.flash('message')[0] });
+});
+
 apiRoutes.post('/registerUser', serverVal, passport.authenticate('registerUser', {
 	successRedirect: '/api/user',
 	failureRedirect: '/',

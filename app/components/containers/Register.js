@@ -26,42 +26,49 @@ class Register extends Component {
 		});
 	}
 
-	validateEmail() {
-		var email = this.state.email;
-
+	validateEmail(email) {
+		var emailVal = false;
 		for(let i=0; i< email.length; i++) {
-			if(email.charCodeAt(i) === 64 && (i !== 0 && i !== email.length))
-				return true;
+			console.log(email.charCodeAt(i));
+			if(email.charCodeAt(i) === 64 && i !== 0 && i !== email.length) 
+				emailVal = true;
 		}
-		this.setState({
-			errEmail: 'You need an email with an @ in it.'
-		});
-		return false;
+		if(!emailVal)
+			this.setState({
+				errEmail: 'You need an email with an @ in it.'
+			});
+		else
+			this.setState({
+				errEmail: ''
+			});
+		return emailVal;
 	}
 
-
-	validateUsername() {
+	validateUsername(username) {
 		var userStatus = false;
-		let username = this.state.username;
-		for(let i=0; i< username.length; i++) {
+		for(let i=0; i < username.length; i++) {
 			if(username.charCodeAt(i) < 48 ||
 				(username.charCodeAt(i) > 57 &&
 					username.charCodeAt(i) < 65) ||
 				(username.charCodeAt(i) > 90 &&
 					username.charCodeAt(i) < 97) ||
 				username.charCodeAt(i) > 122) {
-				userStatus = false;
+					
+					userStatus = false;
 			}
 		}
 		if(!userStatus)
 			this.setState({
 				errUser: 'Username must contain only letters, numbers and underscores.'
 			});
+		else 
+			this.setState({
+				errUser: ''
+			});
 		return userStatus;
 	}
 
-	validatePassword() {
-		var pw = this.state.password;
+	validatePassword(pw) {
 		var oneUpper = false;
 		var oneLower = false;
 		var oneNum = false;
@@ -80,45 +87,53 @@ class Register extends Component {
 			this.setState({
 				errPw: 'Passwords must contain at least one number, one lowercase and one uppercase letter. Passwords must be between 6 and 20 characters long.'
 			});
+
+		if(oneUpper && oneLower && oneNum)
+			this.setState({
+				errPw: ''
+			});
 		return oneUpper && oneLower && oneNum;
 	}
 
-	matchPw() {
-		var pw = this.state.password;
-		var rPw = this.state.rpassword;
-
+	matchPw(pw, rPw) {
 		for(let i=0; i < pw.length; i++)
-			if(pw.charCodeAt(i) !== rPw.charCodeAt(i))
+			if(pw.charCodeAt(i) !== rPw.charCodeAt(i)) {
+				this.setState({
+					errMatch: 'Your password and confirmation password do not match.'
+				})
 				return false;
+			}
 
 		this.setState({
-			errMatch: 'Your password and confirmation do not match.'
+			errMatch: ''
 		});
 		return true;
 	}
 
 	handleRegister(e) {
 		e.preventDefault();
+		if(this.validateEmail(this.state.email) && this.validateUsername(this.state.username) 
+			&& this.validatePassword(this.state.password) && this.matchPw(this.state.password, this.state.rpassword)) {
+			console.log('valid data');
+		}
 	}
 
 	render() {
 		return (
 			<div className="register-container">
 				<Error error = {this.state.error} />
-				<button className="back-btn btn-default" type="submit"><Link className='button-link' to='/'><span className="glyphicon glyphicon-arrow-left"></span></Link></button>
+				<button className="back-btn btn-default" type="submit">
+					<Link className='button-link' to='/'><span className="glyphicon glyphicon-arrow-left"></span></Link>
+				</button>
 				<form className = "register-form" >
-					<Input aClass="input" name="email" placeholder = "Email" error={this.state.errEmail}
-						onChange={ (e) => this.handleChange(e) } isValid = {() => this.validateEmail()} />
-					}
-					<Input aClass="input" name="username" placeholder="Username" error={this.state.errUser}
-						onChange={ (e) => this.handleChange(e) } isValid = {() => this.validateUsername()} />
-					}
-					<Input aClass="input" type="password" name="password" placeholder="Password" error={this.state.errPw}
-						onChange={ (e) => this.handleChange(e) } isValid = {() => this.validatePassword() } />
-					}
-					<Input aClass="input" type="password" name="rpassword" placeholder="Re-Type Password" error={this.state.errMatch}
-						onChange={ (e) => this.handleChange(e) } isValid = {() => this.matchPw() } />
-					}
+					<input className="input" name="email" placeholder="Email" onChange={(e)=>this.handleChange(e) } />
+					<Error error={this.state.errEmail} />
+					<input className="input" name="username" placeholder="Username" onChange={(e)=>this.handleChange(e) } />
+					<Error error={this.state.errUser} />
+					<input className="input" type="password" name="password" placeholder="Password" onChange={(e)=>this.handleChange(e) } />
+					<Error error={this.state.errPw} />
+					<input className="input" type="password" name="rpassword" placeholder="Re-Type Password" onChange={(e)=>this.handleChange(e) } />
+					<Error error={this.state.errMatch} />
 					<button className = "btn btn-last btn-default" type ="submit" onClick={ (e) => this.handleRegister(e) }>Register</button>
 				</form>
 			</div>
