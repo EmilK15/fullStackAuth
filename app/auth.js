@@ -19,8 +19,8 @@ module.exports = function(passport, User, Admin) {
 		}); 
 	});
 
-	passport.use('login', new localStrategy({
-	passReqToCallback: true},
+	passport.use('login', new localStrategy(
+		{passReqToCallback: true},
 	function(req, username, password, done) {
 		User.findOne({ username }, function(err, user) {
 			if(err || !user) {

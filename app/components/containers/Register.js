@@ -29,7 +29,6 @@ class Register extends Component {
 	validateEmail(email) {
 		var emailVal = false;
 		for(let i=0; i< email.length; i++) {
-			console.log(email.charCodeAt(i));
 			if(email.charCodeAt(i) === 64 && i !== 0 && i !== email.length) 
 				emailVal = true;
 		}
