@@ -47,9 +47,9 @@ class Login extends Component {
 			<div className= 'landing-form'>
 				<Error error = {this.state.error} />
 				<form className ='login-form' id ='authenticate' onSubmit={ (e) => this.handleSubmit(e)} >
-					<input className = "input input-username" type = "text" name = "username" 
+					<input className = "input input-username" type = "text" name = "username"
 					placeholder = "Username" required onChange={ (e) => this.handleChange(e) }/>
-					<input className = "input input-pw" type = "password" name = "password" 
+					<input className = "input input-pw" type = "password" name = "password"
 					placeholder = "Password" required onChange={ (e) => this.handleChange(e) }/>
 					<button className = "btn btn-default" type = "submit">Login</button>
 				</form>
