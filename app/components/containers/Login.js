@@ -27,9 +27,6 @@ class Login extends Component {
 			username,
 			password
 		})
-		.then(function(res) {
-			console.log('logged in');
-		})
 		.catch(function(err) {
 			this.setState({
 				err

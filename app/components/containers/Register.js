@@ -15,7 +15,8 @@ class Register extends Component {
 			errEmail: '',
 			errUser: '',
 			errPw: '',
-			errMatch: ''
+			errMatch: '',
+			errorMsg: ''
 		}
 	}
 
@@ -86,7 +87,16 @@ class Register extends Component {
 		e.preventDefault();
 		if(this.validateEmail(this.state.email) && this.validateUsername(this.state.username)
 			&& this.validatePassword(this.state.password) && this.matchPw(this.state.password, this.state.rpassword)) {
-			console.log('valid data');
+				axios.post('/api/register', {
+						username: this.state.username,
+						password: this.state.password,
+						email: this.state.email
+				})
+				.catch((err) => {
+					this.setState({
+						errorMsg: err
+					});
+				});
 		}
 	}
 
@@ -97,6 +107,7 @@ class Register extends Component {
 					<Link className='button-link' to='/'><span className="glyphicon glyphicon-arrow-left"></span></Link>
 				</button>
 				<form className = "register-form" >
+					<Error error={this.state.errorMsg} />
 					<input className="input" name="email" placeholder="Email" onChange={(e)=>this.handleChange(e) } />
 					<Error error={this.state.errEmail} />
 					<input className="input" name="username" placeholder="Username" onChange={(e)=>this.handleChange(e) } />
