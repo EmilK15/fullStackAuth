@@ -87,10 +87,11 @@ class Register extends Component {
 		e.preventDefault();
 		if(this.validateEmail(this.state.email) && this.validateUsername(this.state.username)
 			&& this.validatePassword(this.state.password) && this.matchPw(this.state.password, this.state.rpassword)) {
-				axios.post('/api/register', {
+				axios.post('/api/registerUser', {
+						email: this.state.email,
 						username: this.state.username,
 						password: this.state.password,
-						email: this.state.email
+						rpassword: this.state.rpassword
 				})
 				.catch((err) => {
 					this.setState({

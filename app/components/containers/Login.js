@@ -37,6 +37,15 @@ class Login extends Component {
 
 	handleSignup(e) {
 		e.preventDefault();
+		axios.post('/api/login', {
+
+		})
+		.catch((err) => {
+			this.setState({
+				error: err
+			});
+		});
+
 	}
 
 	render() {

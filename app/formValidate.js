@@ -1,8 +1,8 @@
 'use strict';
 
 var formValidate = function(email, username, pw, rePw) {
-	/*email validation will be last part, can use third party to send that email
-		an email and a code + link to verify with so that they can sign-in
+	/* TODO: Use third party api to send email to user's email with a
+		code + link to verify with so that they can sign-in.
 	*/
 	var emailStatus = false;
 	var userStatus = false;

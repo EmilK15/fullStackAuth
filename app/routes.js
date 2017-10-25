@@ -32,7 +32,7 @@ var serverVal = function(req, res, next) {
 if(validate(req.body.email, req.body.username, req.body.password, req.body.rpassword))
 		return next();
 	else
-		res.redirect('/')
+		res.redirect('/register');
 }
 
 app.get('/', function(req, res) {
@@ -87,7 +87,7 @@ apiRoutes.route('/users')
 	.get(controller.userController.list_all_users);
 
 apiRoutes.get('/user', ensureAuthorized, function(req, res) {
-	res.render('user.ejs', { username: req.user.username });
+	res.render('index', { username: req.user.username });
 });
 
 apiRoutes.route('/admin/:username')
@@ -97,7 +97,7 @@ apiRoutes.route('/admin/:username')
 	.delete(controller.adminController.delete_admin);
 
 apiRoutes.get('/admin', ensureAuthorized, function(req, res) {
-	res.render('admin.ejs', { username: req.user.username });
+	res.render('index', { username: req.user.username });
 });
 
 apiRoutes.get('/logout', ensureAuthorized, function(req, res) {
