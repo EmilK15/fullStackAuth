@@ -15,53 +15,51 @@ class Login extends Component {
 		};
 	}
 
-	handleChange(e) {
+	onUserChange(e) {
 		this.setState({
-			[e.target.name]: e
+			username: e.target.value
+		});
+	}
+
+	onPwChange(e) {
+		this.setState({
+			password: e.target.value
 		});
 	}
 
 	handleSubmit(e) {
 		e.preventDefault();
 		axios.post('/api/login', {
-			username,
-			password
+			username: this.state.username,
+			password: this.state.password
 		})
 		.catch(function(err) {
 			this.setState({
 				err
 			});
 		});
-
 	}
 
 	handleSignup(e) {
 		e.preventDefault();
-		axios.post('/api/login', {
-
-		})
-		.catch((err) => {
-			this.setState({
-				error: err
-			});
-		});
-
 	}
 
 	render() {
 		return (
-			<div className= 'landing-form'>
+			<div className= "landing-form">
 				<Error error = {this.state.error} />
-				<form className ='login-form' id ='authenticate' onSubmit={ (e) => this.handleSubmit(e)} >
+				<form className ="login-form" id ="authenticate" onSubmit={ (e) => this.handleSubmit(e)} >
 					<input className = "input input-username" type = "text" name = "username"
-					placeholder = "Username" required onChange={ (e) => this.handleChange(e) }/>
+					placeholder = "Username" required onChange={ (e) => this.onUserChange(e) }/>
 					<input className = "input input-pw" type = "password" name = "password"
-					placeholder = "Password" required onChange={ (e) => this.handleChange(e) }/>
-					<button className = "btn btn-default" type = "submit">Login</button>
+					placeholder = "Password" required onChange={ (e) => this.onPwChange(e) }/>
+					<button className = "btn btn-default" type = "submit">
+						<Link className="button-link" to="">Login</Link>
+					</button>
 				</form>
-				<form className ='signup-form' onSubmit={ (e) => this.handleSignup(e)} >
+				<form className ="signup-form" onSubmit={ (e) => this.handleSignup(e)} >
 					<button className = "btn btn-last btn-default" type = "submit">
-						<Link className='button-link' to='/register'>Sign-up</Link></button>
+						<Link className="button-link" to="/register">Sign-up</Link></button>
 				</form>
 			</div>
 			)

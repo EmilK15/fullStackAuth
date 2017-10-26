@@ -11,7 +11,7 @@ var db = require('./models/database').models;
 app.use('/api', apiRoutes);
 
 var passport = require('passport');
-//changed to db.model for createConnection from mongoose
+//changed to db.models for createConnection from mongoose
 var auth = require('./auth')(passport, db.user, db.admin);
 
 app.all('/*', function(req, res, next) {
@@ -61,15 +61,15 @@ apiRoutes.post('/registerUser', serverVal, passport.authenticate('registerUser',
 	failureFlash: true
 }));
 
-//loginUser is main endpt
+//login is main endpt to decide login credentials
 apiRoutes.post('/login', passport.authenticate('login', {
 	failureRedirect: '/',
 	failureFlash: true
 	}), function(req, res) {
-		if(req.user.isAdmin)
-			res.redirect('/api/admin');
-		res.redirect('/api/user');
-});
+			if(req.user.isAdmin)
+				res.redirect('/api/admin');
+			res.redirect('/api/user');
+	});
 
 apiRoutes.post('/registerAdmin', serverVal, passport.authenticate('registerAdmin', {
 	successRedirect: '/api/admin',

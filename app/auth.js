@@ -105,10 +105,10 @@ module.exports = function(passport, User, Admin) {
 							email: req.body.email
 						});
 						newUser.save(function(err) {
-						if(err)
-							return done(null, false, req.flash('message', 'Username or Email already exists'));
-						else
-							return done(null, newUser);
+							if(err)
+								return done(null, false, req.flash('message', 'Username or Email already exists'));
+							else
+								return done(null, newUser);
 						});
 					} else {
 						return done(null, false, req.flash('message', 'Email or Username in use already'));

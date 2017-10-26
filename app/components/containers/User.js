@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Error from '../presentation/Error';
+import { Link } from 'react-router-dom';
 
 class User extends Component {
 
@@ -26,7 +27,9 @@ class User extends Component {
       <div className="container">
         <div>User landing page</div>
         <Error error={this.state.err} />
-        <button className="btn btn-default" onClick={(e)=>this.handleLogout(e)}>Logout</button>
+        <button className="btn btn-default" onClick={(e)=>this.handleLogout(e)}>
+          <Link className="button-link" to="/">Logout</Link>
+        </button>
       </div>
     )
   }

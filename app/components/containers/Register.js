@@ -28,7 +28,7 @@ class Register extends Component {
 
 	validateEmail(email) {
 		var emailRe = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-	  if(String(email).match(emailRe))
+	  	if(String(email).match(emailRe))
 			this.setState({
 				errEmail: ''
 			});
@@ -94,6 +94,7 @@ class Register extends Component {
 						rpassword: this.state.rpassword
 				})
 				.catch((err) => {
+					console.log('error');
 					this.setState({
 						errorMsg: err
 					});
@@ -105,7 +106,7 @@ class Register extends Component {
 		return (
 			<div className="register-container">
 				<button className="back-btn btn-default" type="submit">
-					<Link className='button-link' to='/'><span className="glyphicon glyphicon-arrow-left"></span></Link>
+					<Link className="button-link" to="/"><span className="glyphicon glyphicon-arrow-left"></span></Link>
 				</button>
 				<form className = "register-form" >
 					<Error error={this.state.errorMsg} />
