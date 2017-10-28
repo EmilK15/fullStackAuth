@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Error from '../presentation/Error';
-import { Link } from 'react-router-dom';
+import { Link, browserHistory } from 'react-router-dom';
 
 class Login extends Component {
 
@@ -33,7 +33,15 @@ class Login extends Component {
 			username: this.state.username,
 			password: this.state.password
 		})
-		.catch(function(err) {
+		.then((res) => {
+			console.log('after logging in');
+			console.log(res);
+			if(res.user.isAdmin)
+				browserHistory.push('/api/admin');
+			else
+				browserHistory.push('/api/user');
+		})
+		.catch((err) => {
 			this.setState({
 				err
 			});
@@ -53,13 +61,12 @@ class Login extends Component {
 					placeholder = "Username" required onChange={ (e) => this.onUserChange(e) }/>
 					<input className = "input input-pw" type = "password" name = "password"
 					placeholder = "Password" required onChange={ (e) => this.onPwChange(e) }/>
-					<button className = "btn btn-default" type = "submit">
-						<Link className="button-link" to="">Login</Link>
-					</button>
+					<button className = "btn btn-default" type = "submit">Login</button>
 				</form>
 				<form className ="signup-form" onSubmit={ (e) => this.handleSignup(e)} >
 					<button className = "btn btn-last btn-default" type = "submit">
-						<Link className="button-link" to="/register">Sign-up</Link></button>
+						<Link className="button-link" to="/register">Sign-up</Link>
+					</button>
 				</form>
 			</div>
 			)
